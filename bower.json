@@ -1,0 +1,13 @@
+{
+  "name": "node-enterprise",
+  "version": "0.0.1",
+  "authors": [
+    "zhaoshiling <zhaosl@unicss.com>"
+  ],
+  "description": "A Node.js enterprise project using Postgres",
+  "keywords": [
+    "enterprise"
+  ],
+  "license": "MIT",
+  "private": true
+}

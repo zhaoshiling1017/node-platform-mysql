@@ -1,0 +1,72 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <title>{% block title %}{{ title }}电话会议管理系统{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name='description' content='{{ config.description }}'>
+    <meta name="keywords" content="{{ config.keywords }}"/>
+      {% block head %}
+
+  {% endblock %}
+<script type="text/javascript">
+    function closeTipWin(){
+        $('#sys_tipWin').fadeOut(3000);
+    }
+    function showTipWin(content){
+        $(".form_bj").html(content);
+        $('#sys_tipWin').show();
+    }
+    $(document).ready(function(){
+          {% if error != null %}
+            showTipWin('{{ error }}');
+            closeTipWin();
+         {% elseif success != null %}
+            showTipWin('{{ success }}');
+            closeTipWin();
+        {% endif %}
+    })
+</script>
+</head> 
+<body>
+  {% block index %}
+<div class="header clear">
+    {% include 'top.html' %}
+<div class="transmit_bj">
+       <div class="transmit">
+        {% include 'jplayer.html' %}
+       </div>
+   </div>
+</div>
+<div class="middle_content clear">
+   
+    <div class="contentR_bj">
+        <div class="contentR">
+            <div class="alert_editor alert_text" style="display:none;" id="sys_tipWin">
+                <h3>
+                    <p>提示</p>
+                    <a class="alert_close" href="javascript:closeTipWin();"></a>
+                </h3>
+                <div class="form_bj ">
+                   
+                </div>
+            </div>
+           {% block content %}{% endblock %}
+    </div>
+    </div>
+    <div class="asideL_bj">
+       <!-- 左侧菜单 -->
+       {% include 'left.html' %}
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('input[data-name="datePicker"]').datetimepicker({
+            lang:'ch',
+            format:'Y-m-d H:i'
+        });
+    })
+
+</script>
+{% endblock %}
+</body> 
+</html>

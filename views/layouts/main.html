@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>{% block title %}E聆{% endblock %}</title>
+	  {% block head %}
+	    <link rel="stylesheet" type="text/css" href="/stylesheets/content.css" />
+		
+	    <script type="text/javascript" src="/public/javascripts/jquery.min.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/basic.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/bootstrap-switch.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/jquery.timepicker.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/jquery.numeric.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/icheck.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/tree.jquery.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/jquery.tree_select.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/jquery.select_cascade.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/jquery.ui.widget.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/jquery.iframe-transport.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/jquery.fileupload.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/chosen.jquery.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/moment-with-locales.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/bootstrap-datetimepicker.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/monitoring.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/softphone.js"></script>
+	    <script type="text/javascript" src="/public/javascripts/bootstrap-number-input.js"></script>
+	    <style>
+		    .panel-others, .panel-work-bench {
+		      left: 60px;
+		      top: 42px;
+		      right: 0;
+		      bottom: 0;
+		      overflow: auto;
+		      position: absolute;
+		      height: 100%;
+		    }  
+		</style>
+	  {% endblock %}
+	</head>
+	<body style="overflow:hidden">
+	  <nav class="panel-header">
+	  	{% include '_head.html' %}
+      </nav>
+      <nav class="sidebar">
+	  	{% include '_menu.html' %}
+	  </nav>
+
+	  <div class="panel-main" style="overflow:hidden">
+	    <div class="panel-work-bench" style="overflow:hidden">
+	    </div>
+	    <div class="panel-others" style="display:none; overflow: hidden">
+	      <iframe style="border:none" name="frm-panel-others" width="100%" height="100%" scrolling="no"></iframe>
+	    </div>
+	  </div>
+
+    <script>
+	    $("li.top-menu").on('click', 'a', function() {
+        if ($(this).prop("name") == "menu-work_bench") {
+          $("div.panel-work-bench").show();
+          $("div.panel-others").hide();
+        } else {
+          $("div.panel-work-bench").hide();
+          $("div.panel-others").show();        
+	        }
+	    });
+	</script>
+	</body>
+</html>

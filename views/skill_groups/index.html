@@ -1,0 +1,74 @@
+{% extends '../layouts/content.html' %}
+{% block content %}
+<header class="pager-header">
+  <h2 class="title">
+    技能组
+    <div id="player" class="pull-right">
+      <audio src="" class="skill_group_url"/>
+    </div>
+  </h2>
+</header>
+<div class="panel  pt20 mt5 all-height ">
+  <div class="panel action-panel">
+    <div class="panel-headding">
+      <header class="pager-header">
+        <div class="panel-headding-content panel-header-action">
+          <form class="navbar-form navbar-left" action="/skill_groups" method="get">
+            <span class="pull-left">
+              <div class="input-group">
+                <input type="text" name="search" id="search" placeholder="搜索" class="form-control">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit">查找</button>
+                </span>
+              </div>
+            </span>
+          </form>
+        </div>
+        <div class="action-form">
+          <div class="sub-action">
+            <ul class="list-inline">
+              <li><a class="btn btn btn-primary btn-sm" href="/skill_groups/add">新增</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+    </div>
+    <div class="panel-body">
+      <ul class="list-unstyled schedule_list">
+        {% for skill_group in skill_groups %}
+          <li class="clearfix pb5 pt5 br-b">
+            <div class="row">
+              <div class="col-sm-3">
+                <h4>{{ skill_group.name }}</h4>
+                <p class="text-success text-left">
+                </p>
+              </div>
+              <div class="col-sm-4">
+              </div>
+              <div class="col-sm-5">
+                <p class="text-muted">
+                  创建时间：{{ skill_group.createdAt() }}
+                </p>
+                <ul class="list-inline">
+                  <li>
+                    <a href="/skill_groups/{{ skill_group.id }}/assign_agents">分配坐席</a>
+                  </li>
+                  <li>
+                    <a href="/skill_groups/{{ skill_group.id }}/edit">编辑</a>
+                  </li>
+                  <li>
+                    <a data-confirm="确认删除?" rel="nofollow" data-method="delete" href="/skill_groups/{{ skill_group.id }}/delete?_method=DELETE"  onclick="if (confirm('您确定要删除吗？')){ var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;f.submit(); };return false;">删除</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+      <nav class="pull-right">
+        {{ pagination(pager, 'true' ,'/skill_groups') }} 
+      </nav>
+    </div>
+  </div>
+</div>
+{% endblock %}

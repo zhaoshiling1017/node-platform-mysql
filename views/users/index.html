@@ -1,0 +1,138 @@
+{% extends '../layouts/content.html' %}
+{% block content %}
+<header class="pager-header">
+  <h2 class="title">人员管理</h2>
+</header>
+<div class="panel pt20 mt5 all-height ">
+  <div class="row ">
+    <div class="col-md-3 br-r">
+      <div class="well department-tree-container">
+        <div class="_department_tree"></div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="panel action-panel">
+        <div class="panel-headding">
+          <header class="pager-header">
+            <div class="panel-headding-content panel-header-action">
+              <h3 class="title">{{ department_name }}</h3>
+              <div class="sub-action">
+                <ul class="list-inline">
+                  <li><a href="/users/add?department_id={{ department_id }}">新增用户</a></li>&nbsp;|&nbsp;
+                  <li>
+                    <a href="javascript:void(0);" data-dept="{{ department_id }}" name="add_subdept">新增子部门</a>
+                  </li>&nbsp;|&nbsp;
+                  <li>
+                    <a href="javascript:void(0);" data-dept="{{ department_id }}" name="edit_subdept">修改</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="action-form">
+              <form class="navbar-form navbar-right" action="/users" method="get">
+								<span class="pull-right">
+									<div class="input-group">
+										<input type="text" name="search" id="search" placeholder="搜索" value="{{ query.search }}" class="form-control">
+										<input type="hidden" name="department_id" id="department_id" value="{{ department_id }}" class="form-department">
+										<span class="input-group-btn">
+											<button class="btn btn-default" type="submit">查找</button>
+										</span>
+									</div>
+								</span>
+							</form>
+						</div>
+					</header>
+				</div>
+				<div class="panel-body">
+					<h4 class="pb10 br-b">用户</h4>
+					<ul class="list-unstyled user_list">
+ 						{% for user in users %}
+		          <li class="clearfix pb10 pt10 br-b">
+								<div class="pull-left pr10">
+									<a href="#">
+										<img class="media-object" alt="64x64" src="" data-holder-rendered="true" style="width: 64px; height: 64px;">
+									</a>
+								</div>
+								<div class="pull-left">
+									<h4><a href="#">{{ user.name }}</a></h4><p>{{ user.job_code }}</p>
+								</div>
+								<div style="pull-right">
+									<ul class="list-inline text-right">
+										<li><a name="edit_passwd" data-passwd="{{ user.id }}" href="javascript:void(0);">修改密码</a></li>&nbsp;|&nbsp;
+										<li><a href="/users/{{ user.id }}/edit?department_id=1">编辑</a></li>&nbsp;|&nbsp;
+										<li>
+                      <a href="/users/{{ user.id }}/delete?_method=DELETE" onclick="if (confirm('您确定要删除吗？')){ var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;f.submit(); };return false;">删除</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+            {% endfor %}
+					</ul>
+					<nav class="pull-right">
+            {{ pagination(pager, 'true' ,'/users') }} 
+          </nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="department_modal" class="modal fade" tabindex="-1" data-backdrop="false" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	</div>
+</div>
+<script>
+  $('a[name="add_subdept"]').click(function(){
+ 		var _obj = $(this);
+		var deptId=$(this).attr("data-dept");
+		$.get('/departments/add?department_id=' + deptId, null, function(data){
+      var _addWin = $('#department_modal');
+			_addWin.html(data);
+			_addWin.modal('show');
+		});
+ 	});
+
+  $('a[name="edit_subdept"]').click(function(){
+ 		var _obj = $(this);
+		var deptId=$(this).attr("data-dept");
+		$.get('/departments/' + deptId + '/edit', null, function(data){
+      var _addWin = $('#department_modal');
+			_addWin.html(data);
+			_addWin.modal('show');
+		});
+ 	});
+
+  $('a[name="edit_passwd"]').click(function(){
+    var _obj = $(this);
+    var userId = $(this).attr("data-passwd");
+    $.get('/users/' + userId + '/edit_password', null, function(data){
+      var _addWin = $('#department_modal');
+      _addWin.html(data);
+      _addWin.modal('show');
+    });
+  });
+
+	$(function() {
+	  upload_departments();
+	});
+
+  function upload_departments(){
+  	$.getJSON('/departments',function( data ) {
+      console.info(data);
+      $('._department_tree').tree({
+        data: data,
+        autoOpen: true,
+  	    onCreateLi: function(node, $li) {
+	        var _a = "<a href='/users?department_id=" + node.id + "' >" + node.name + "</a>";
+	        var _current_id = {{ department_id }};
+	        if(_current_id==node.id){
+	        	$li.addClass("jqtree-selected");
+	        }
+	        $li.find(".jqtree-title").text('');
+	        $li.find(".jqtree-title").append(_a);
+	      }
+      });
+    });
+  }
+</script>
+{% endblock %}

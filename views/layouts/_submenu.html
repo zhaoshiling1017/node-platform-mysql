@@ -1,0 +1,24 @@
+<div class="p10" style="overflow:auto;height:600px">
+  {% for menu in menus %}
+    {% if menu.name == current_menu %}
+      {% for submenu in menu.resources %}
+        {% if resources.indexOf(submenu.code)!=-1 %}
+            <header class="pager-header">
+              <h5 class="title ph10 mv15">{{ submenu.title }}</h5>
+            </header>
+            <ul class="nav nav-messages p5" role="menu">    
+              {% for leafmenu in submenu.resources %}
+              {% if resources.indexOf(leafmenu.code)!=-1 %}
+              <li>
+                <a href="{{ leafmenu.url }}" class="text-dark fw600 p8 animated animated-short fadeInUp">
+                  {{ leafmenu.title }}
+      		      </a>
+      		    </li>
+              {% endif %}
+              {% endfor %}
+      		</ul>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+</div>

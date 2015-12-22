@@ -1,0 +1,48 @@
+{
+    "yesOrNo": {
+        "0": "否",
+        "1": "是"
+    },
+    "ifUse": {
+        "0": "禁用",
+        "1": "启用"
+    },
+    "operateResult": {
+        "success": "成功",
+        "fail": "失败"
+    },
+    "eventType": {
+        "create": "创建会议",
+        "destroy": "结束会议",
+        "enter": "加入会议",
+        "leave": "离开会议",
+        "kickout": "踢出会议",
+        "invite": "邀请"
+    },
+    "memberStatus": {
+        "ONLINE": "在线",
+        "OFFLINE": "离线",
+        "KICKOUT": "踢出"
+    },
+    "memberSource": {
+        "invit": "邀约",
+        "callin": "呼入",
+        "file": "文件导入",
+        "inputPhone": "号码录入"
+    },
+    "messages_type":{
+      "success": "alert-success", 
+      "notice": "alert-info",
+      "alert": "alert-warning", 
+      "error": "alert-danger"
+    },
+    "number_use":{
+      "unuse": "未使用", 
+      "used": "已使用"
+    },
+    "skill_group_strategy":{
+      "poll": "轮流", 
+      "random": "随机"
+    },
+    "weekdays": ["日","一","二","三","四","五","六"]
+}

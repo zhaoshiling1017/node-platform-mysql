@@ -1,0 +1,252 @@
+@import "bootstrap/bootstrap.less";
+@import "helpers.css.less";
+
+
+.pager-header {
+
+	position: relative;
+    border-bottom: 1px solid #efefef;
+
+	h2.title {
+
+	}	
+
+	p.subtitle {
+
+	}
+
+	.action {
+		position: absolute;
+		right: 0px;
+		bottom: 10px;
+	}
+}
+
+/*==========================
+         tree-menu
+============================*/
+.nav label {
+  color: blue;
+}
+
+/* 2nd level */
+.tree > li > label {
+  padding:2px 15px;
+}
+/* 2nd level */
+.tree > li > label {
+  padding:2px 15px;
+}
+
+/* 3rd level */
+.tree > li > ul > li > a {
+  font-size:2pt;
+  margin-left:15px;
+}
+
+
+/**
+ * 补充的Panel样式
+ */
+
+
+.list-panel {
+
+}
+
+
+.action-panel {
+	header {
+		position: relative;
+	    border-bottom: 1px solid #efefef;
+		.pb10;
+		.clearfix;
+
+		.title {
+			//.panel-title;
+			// .pull-left;
+		}
+
+		.action {
+			position: absolute;
+			right: 0px;
+			bottom: 10px;			
+		}
+
+		.action-form {
+			position: absolute;
+			right: 0px;
+			bottom: 10px;	
+		}
+
+		.subaction {
+
+		}
+	}
+}
+
+ul.list-table {
+	.list-unstyled;
+
+	> li {
+		border-bottom:1px solid #EFEFEF;
+		padding-bottom:10px;
+		padding-top:10px;		
+		.clearfix;
+	}
+}
+
+/**
+ * 卡片类布局
+ */
+
+
+
+.card(@content-padding-right: 80px) {
+
+
+	background-repeat: no-repeat;
+	border: 1px solid #e7e7eb;
+	padding: 0 20px 0 120px;
+	position: relative;	
+
+	.content {
+		padding-right: @content-padding-right;
+		background-repeat: no-repeat;
+		background-position: right center;		
+		p{
+			color: #8d8d8d;
+			font-size:12px;
+		}
+	}
+
+	.status {
+		position: absolute; 
+		right: 40px; 
+		top: 32px;		
+	}
+
+	.mask {
+		.text-center;
+		position: absolute; 
+		top: 0px; 
+		left: 94px; 
+		right: 0px; 
+		bottom: 0px; 
+		opacity: 0.8; 
+		display: none; 
+		background-color: rgb(239, 239, 239);		
+	}
+
+}
+
+.plugin-card {
+	.card();
+}
+
+.phone-card {
+	.card(0px);
+}
+
+
+/**
+ * 插件描述页面
+ */
+
+.plugin-heading {
+	border: 1px solid #e7e7eb;
+	padding: 0 20px 0 120px;
+	background-repeat: no-repeat;
+	.clearfix; 
+	.mb30;
+
+	.title {
+		.pull-left;
+	}
+
+	.pay-settings {
+
+	}	
+
+	.payment {
+		.pull-right;
+		.mt25;
+		font-size: 12px;
+
+		input {
+			width:20px;			
+		}
+	}
+
+	.payment-desc {
+		font-size:20px;
+		color:#2f87c1;		
+		.pull-right;
+		.mt25; 		
+
+		input {
+			width:20px;			
+		}
+	}
+}
+
+.plugin-body {
+
+	.condition {
+
+	}
+
+	.introduce {
+
+	}
+
+	.claim {
+
+	}
+}
+
+/**
+ * 插件支付页面
+ */
+
+.plugin-order-detail {
+
+	.cash-card-list, .order-item-list {
+		.list-inline;
+	    >li{
+	  	  .mb15;
+		}
+	}	
+
+	.payment-confirm {
+	  border-top:1px solid #efefef;
+	  margin-top:10px;
+
+	  .content {
+	  	.pull-right;
+	  	.p20;
+
+	  	label.amount {
+			color:red;
+			font-size:20px;	
+			.pr20;
+	  	}
+	  }
+	}	
+}
+
+.plugin-payment-detail {
+	.order-detail {
+		.list-unstyled;
+	}
+
+	.amount {
+		font-size:20px;
+		color:red;
+	}	
+}
+
+.input-text-danger {
+	color: red;
+}
+

@@ -1,0 +1,126 @@
+{% extends '../../layouts/content.html' %}
+{% block head %}
+{% parent %}
+  <link href="/public/stylesheets/chosen.css" rel="stylesheet" type="text/css"/>
+  <link href="/public/stylesheets/icheck-skins.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="/public/javascripts/chosen.jquery.js"></script>
+{% endblock %}
+{% block content %}
+<header class="pager-header">
+  <h2 class="title">
+  新建日程
+  </h2>
+</header>
+<div class="panel mb25 mt5 all-height">
+  <div class="p25 pb5 row all-height">
+    <div class="tab-content">
+      <div id="tab1_1" class="tab-pane active">
+        <form class="simple_form form-horizontal" action="/schedules" accept-charset="UTF-8" method="post">
+          <div class="input string optional schedule_node_name">
+            <div class="form-group">
+              <label class="string optional control-label col-sm-2" tag="label">名称</label>
+              <div class="col-sm-6">
+                <input class="string optional form-control" placeholder="名称" type="text" name="schedule[name]" value="{{ schedule.name }}">
+              </div>
+              <label class="col-sm-3 text-danger">
+                {{ errors.name.message }}
+              </label>
+            </div>
+          </div>
+          <div class="input string optional schedule_node_name">
+            <div class="form-group">
+              <label class="string optional control-label col-sm-2" tag="label">号码</label>
+              <div class="col-sm-6">
+                <select class="select optional select_number form-control" name="schedule[number]">
+                  <option value=""></option>
+                  <option value="56587302">56587302</option>
+                  <option value="89508181">89508181</option>
+                  <option value="60285450">60285450</option>
+                  <option value="01056954966">01056954966</option>
+                  <option value="01056587302">01056587302</option>
+                  <option value="01056954988">01056954988</option>
+                </select>
+              </div>
+              <label class="col-sm-3 text-danger"></label>
+            </div>
+          </div>
+          <div class="input string optional schedule_node_name">
+            <div class="form-group">
+              <label class="string optional control-label col-sm-2" tag="label">优先级</label>
+              <div class="col-sm-6">
+                <input class="string optional form-control" placeholder="优先级" type="text" name="schedule[priority]" value="{{ schedule.priority }}">
+              </div>
+              <label class="col-sm-3 text-danger"></label>
+            </div>
+          </div>
+          <div class="form-group clearfix">
+            <label class="col-sm-2 control-label">日期(起,止)</label>
+            <div class="col-sm-3">
+              <input type="text" name="schedule[date_begin_at]" class="form-control input-sm date_begin_at" value="{{ schedule.date_begin_at }}">
+            </div>
+            <div class="col-sm-3">
+              <input type="text" name="schedule[date_end_at]" class="form-control input-sm date_end_at" value="{{ schedule.date_end_at }}">
+            </div>
+          </div>
+          <div class="form-group clearfix">
+            <label class="col-sm-2 control-label">时间(起,止)</label>
+            <div class="col-sm-3">
+              <input type="text" name="schedule[time_begin_at]" class="form-control input-sm time_begin_at" value="{{ schedule.time_begin_at }}">
+            </div>
+            <div class="col-sm-3">
+              <input type="text" name="schedule[time_end_at]" class="form-control input-sm time_end_at" value="{{ schedule.time_end_at }}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">星期</label>
+            <div class="col-sm-8">
+              <ul class="list-inline">
+                {% for day in dict.weekdays %}
+                  <li class="pt5">
+                    <input type="checkbox" name="schedule[arr_work_weekdays][]" value="{{ loop.index }}" />
+                    <label>{{ day }}</label>
+                  </li>
+                {% endfor %}                                        
+              </ul>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-12">
+              <a class="btn-link btn-default pr10" href="/schedules">取消</a>
+              <input type="submit" name="commit" value="保存" class="btn btn-sm btn-primary">
+            </div>
+          </div>
+        </form>
+        <script type="text/javascript">
+         $("[name='schedule[arr_work_weekdays][]']").each(function(){
+            var self = $(this),
+            label = self.next(),
+            label_text = label.text();
+
+            label.remove();
+            self.iCheck({
+              checkboxClass: 'icheckbox_line-green',
+              radioClass: 'iradio_line',
+              insert: '<div class="icheck_line-icon"></div>' + label_text
+            });
+          });
+
+          $('.select_number').chosen({placeholder_text_single: '请选择', no_results_text: '没有匹配结果'});
+
+          $("form").cascadeSelect({
+            source: ".source",
+            sub_cascade: ".sub_cascade", 
+            url: '/sub_cascade_voice'
+          });
+
+          $('.date_begin_at').datetimepicker({format: 'YYYY-MM-DD', showClose:true});
+          $('.date_end_at').datetimepicker({format: 'YYYY-MM-DD', showClose:true});
+
+          $('.time_begin_at').datetimepicker({format: 'HH:mm', showClose:true});
+          $('.time_end_at').datetimepicker({format: 'HH:mm', showClose:true});
+        </script>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

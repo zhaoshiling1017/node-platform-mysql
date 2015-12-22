@@ -1,0 +1,17 @@
+{% extends '../layouts/sign.html' %}
+{% block content %}
+<form class="form-horizontal" id="new_user" action="/signin" accept-charset="UTF-8" method="post">
+  <input name="utf8" type="hidden" value="✓">
+  <input type="hidden" name="authenticity_token" value="">
+  <h2 class="form-signin-heading">登录E聆</h2>
+  <div class="form-group">
+    <label for="exampleInputPhone1" class="sr-only">手机</label>
+    <input autofocus="autofocus" class="form-control" placeholder="手机" type="text" name="phone" id="user_phone">
+  </div>
+  <div class="form-group">
+    <label for="" class="sr-only">密码</label>
+    <input autocomplete="off" class="form-control" placeholder="密码" type="password" name="password" id="user_password">
+  </div>
+  <input type="submit" name="commit" value="登录" class="btn btn-lg btn-primary btn-block">
+</form>
+{% endblock %}

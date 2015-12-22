@@ -1,0 +1,62 @@
+{% extends '../layouts/content.html' %}
+{% block content %}
+<header class="pager-header">
+  <h2 class="title">
+    中继号码管理
+  </h2>
+</header>
+<div class="panel pt20 mt5 all-height ">
+  <div class="panel action-panel">
+    <div class="panel-headding">
+      <header class="pager-header">
+        <div class="panel-headding-content panel-header-action">
+          <form class="navbar-form navbar-left" action="/trunk_numbers" accept-charset="UTF-8" method="get">
+            <span class="pull-left">
+              <div class="input-group">
+                <input type="text" name="search" placeholder="搜索" class="form-control" value="">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit">查找</button>
+                </span>
+              </div>
+            </span>
+          </form>
+        </div>
+        <div class="action-form">
+          <div class="sub-action">
+            <ul class="list-inline">
+              <li><a class="btn btn btn-primary btn-sm" href="/trunk_numbers/add">新增</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+    </div>
+    <div class="panel-body">
+       <table class="table table-bordered">
+        <tbody>
+          <tr class="active">
+            <td>中继号码</td>
+            <td width="350px">状态</td>
+            <td width="350px">操作</td>
+          </tr>
+          {% for trunk in trunk_numbers %}
+          <tr>
+            <td>{{ trunk.number }}</td>
+            <td>{{ dict.number_use[trunk.status] }}</td>
+            <td>
+              <a href="/trunk_numbers/{{ trunk.id }}/edit">编辑</a> |
+              <a href="/trunk_numbers/{{ trunk.id }}/delete?_method=DELETE" onclick="if (confirm('您确定要删除吗？')){ var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;f.submit(); };return false;">删除</a>
+            </td>
+          </tr> 
+          {% endfor %}
+        </tbody>
+      </table>
+      <nav class="pull-right">
+        {{ pagination(pager, 'true' ,'/trunk_numbers') }} 
+      </nav>
+    </div>
+  </div>
+</div>
+<script>
+
+</script>
+{% endblock %}

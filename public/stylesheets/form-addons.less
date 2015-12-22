@@ -1,0 +1,91 @@
+
+/*===============================================
+  form-addon
+
+================================================= */
+.form-addon {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  line-height: 1.231;
+  font-weight: 400;
+  font-size: 14px;
+  .form-addon-group{
+    margin-bottom: 10px;
+    .section{
+      position: relative;
+      display: block;
+    }
+    .section-left{
+      .addon-section-input(120px);
+      .button{ width: 120px;left: 0;};
+    }
+  }
+  .button {
+    font-size: 15px;
+    cursor: pointer;
+    padding: 0 18px;
+    text-align: center;
+    vertical-align: top;
+    background: #DBDBDB;
+    display: inline-block;
+    -webkit-user-drag: none;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.2);
+    border: 1px solid #DDD;
+    background: #F5F5F5;
+    position: absolute;
+    cursor: pointer;
+    color: #626262;
+    height: 36px;
+    line-height: 34px;
+    top: 0;
+    border-right: 0;
+  }
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background-color: #3bafda;
+  }
+  .field {
+    display: block;
+    position: relative;
+  }
+  label,
+  input,
+  button,
+  select,
+  textarea {
+    margin: 0;
+    font-size: 14px;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    color: #626262;
+    outline: none;
+  }
+  .select,
+  .gui-input {
+    position: relative;
+    vertical-align: top;
+    border: 1px solid #DDD;
+    display: -moz-inline-stack;
+    display: inline-block;
+    *display: inline;
+    color: #626262;
+    outline: none;
+    height: 36px;
+    width: 100%;
+    *zoom: 1;
+  }
+  .field input,
+  .append-picker-icon input,
+  .prepend-picker-icon input {
+    width: 100%;
+  }
+}
+
+/*==================================================================
+  B. smart widget buttons - to left
+===================================================================*/
+.addon-section-input(@padding:50px) {
+  padding-left: @padding;
+}
+.addon-section-label(@width:50px) {
+  width: @width;
+}

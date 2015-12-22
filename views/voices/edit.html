@@ -1,0 +1,88 @@
+{% extends '../layouts/content.html' %}
+{% block head %}
+{% parent %}
+  <link href="/public/stylesheets/jquery.fileupload.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block content %}
+  <header class="pager-header">
+    <h2 class="title">
+    编辑语音文件
+    </h2>
+  </header>
+  <div class="panel mb25 mt5 all-height">
+    <div class="p25 pb5 row all-height">
+      <div class="tab-content">
+        <div id="tab1_1" class="tab-pane active">
+          <form class="simple_form form-horizontal" action="/voices/{{ voice.id }}?_method=PUT" accept-charset="UTF-8" method="post">
+            <div class="input string optional">
+              <div class="form-group">
+                <label class="string optional control-label col-sm-2" tag="label">语音名称</label>
+                <div class="col-sm-6">
+                  <input class="string optional form-control" placeholder="语音名称" type="text" name="voice[file_name]" value="{{ voice.file_name }}">
+                </div>
+                <label class="col-sm-3 text-danger">
+                    {{ voice.showErr(errors, 'file_name') }}
+                </label>
+              </div>
+            </div>
+            <input type="hidden" id="voice_file_voice_path" name="voice[file_voice_path]" value="{{ voice.file_voice_path }}">
+            <input type="hidden" id="voice_file_voice_name" name="voice[file_voice_name]" value="{{ voice.file_voice_name }}">
+            <div class="form-group">
+              <label class="control-label col-sm-2">语音文件</label>
+              <div class="col-sm-4 show-voice-file-name">{{ voice.file_voice_name }}</div>
+              <div class="col-sm-6">
+                <span class="btn btn-success fileinput-button btn-xs">
+                  <i class="glyphicon glyphicon-plus"></i>
+                  <span>上传文件</span>
+                  <input id="fileupload" type="file" name="file_voice">
+                </span>
+              </div>
+            </div>
+            <div class="input string optional">
+              <div class="form-group">
+                <label class="string optional control-label col-sm-2" tag="label">文件描述</label>
+                <div class="col-sm-6">
+                  <input class="string optional form-control" placeholder="文件描述" type="text" name="voice[file_voice_desc]" value="{{ voice.file_voice_desc }}">
+                </div>
+                <label class="col-sm-3 text-danger">
+                    {{ voice.showErr(errors, 'file_voice_desc') }}
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-12">
+                <a class="btn-link btn-default pr10" href="/voices">取消</a>
+                <input type="submit" name="commit" value="保存" class="btn btn-sm btn-primary">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#fileupload").fileupload({
+      url:"/voices/upload",
+      done:function(e,data){
+        var result = data.result;
+        console.info(result);
+        var message = '';
+        if(result.result==true){
+          $("#voice_file_voice_path").val(result.file.path);
+          $("#voice_file_voice_name").val(result.file.filename);
+          $(".show-voice-file-name").text(result.file.filename);
+          message = '<div class="alert alert-success fade in"><button class="close pl10" data-dismiss="alert">×</button>'+ result.message +'</div>'
+        }else{
+          $("#voice_file_voice_path").val('');
+          $(".show-voice-file-name").text('');
+          $("#voice_file_voice_name").val('');
+          message = '<div class="alert alert-danger fade in"><button class="close pl10" data-dismiss="alert">×</button>'+ result.message +'</div>';
+        }
+        $(".message").append(message);
+      }
+    })
+  });
+</script>
+{% endblock %}

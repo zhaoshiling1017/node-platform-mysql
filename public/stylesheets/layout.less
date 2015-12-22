@@ -1,0 +1,132 @@
+@import "bootstrap/bootstrap.less";
+@import "variables.css.less";
+@import "helpers.css.less";
+@import "config/customers.css.less";
+/*==================================================================
+  面板页头
+===================================================================*/
+.panel-header{
+  .navbar;
+  .navbar-default;
+  .navbar-fixed-top;
+}
+
+/*==================================================================
+  边栏菜单
+===================================================================*/
+.sidebar{
+  background: #e7e7e7;
+  border-top: 1px #dcdcdc solid;
+  border-right: 1px solid #ccc;
+  display: block;
+  position: absolute;
+  overflow: none;
+  top: 42px;
+  bottom: 0;
+  left: -1px;
+  width: 60px;
+  @media screen and (max-width:@screen-md-min){width: 42px;}
+  z-index: 9;
+}
+
+.sidebar-base{
+  position: absolute;
+  left: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.sidebar-top{
+  top: 0;
+  .sidebar-base;
+}
+
+.sidebar-bottom{
+  bottom: 0;
+  .sidebar-base;
+}
+
+.sidebar-top , .sidebar-bottom {
+  li{
+    position: relative;
+    display: block;
+    padding: 7px 0;
+    a{
+      padding: 0;
+      line-height: 35px;
+      height: 35px;
+      display: block;
+      overflow: hidden;
+      span:nth-child(1){
+        color: @icon-color;
+        left: -1px;
+        width: 60px;
+        @media screen and (max-width:@screen-md-min){width: 42px;}
+        font-size: 18px;
+        padding-left: 0;
+        text-align: center;
+        &:hover{
+          color: darken(@icon-color, 20%);
+        }
+      }
+    }
+  }
+}
+
+/*==================================================================
+  面板主体
+===================================================================*/
+.panel-main-body {
+  position: absolute;
+  top: 42px;
+  left: 60px;
+  @media screen and (max-width:@screen-md-min){left: 0px}
+  bottom: 0;
+  right: 0;
+  //z-index: 12;
+}
+
+/*==================================================================
+  面板-左边栏
+===================================================================*/
+.panel-left  {
+  @media screen and (max-width:@screen-md-min){right: -300px;position: fixed;}
+  padding: 0px;
+  margin: 0px;
+  width:300px;
+  height:100%;
+  background-color: #f8f8f8;
+}
+
+
+.panel-left-bottom{
+  position: absolute;
+  left: 0;
+  padding-left: 0;
+  list-style: none;
+  bottom: 0;
+}
+
+/*==================================================================
+  面板-主体
+===================================================================*/
+.panel-section {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  position: absolute;
+  left: 300px;
+  @media screen and (max-width:@screen-md-min){left: 42px;padding: 0;}
+  height:100%;
+}
+
+/*==================================================================
+  面板-消息
+===================================================================*/
+.message {
+  position:fixed;
+  right:100px;
+  z-index: 1500;
+  min-width: 300px;
+}

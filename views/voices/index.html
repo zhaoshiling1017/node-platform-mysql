@@ -1,0 +1,105 @@
+{% extends '../layouts/content.html' %}
+{% block head %}
+{% parent %}
+  <link href="/public/stylesheets/jquery.fileupload.css" rel="stylesheet" type="text/css"/>
+  <script src="/public/javascripts/audiojs/audio.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<header class="pager-header">
+  <h2 class="title">
+    语音库
+    <div id="player" class="pull-right">
+      <audio src="" class="voice_url"/>
+    </div>
+  </h2>
+</header>
+<div class="panel  pt20 mt5 all-height ">
+  <div class="panel action-panel">
+    <div class="panel-headding">
+      <header class="pager-header">
+        <div class="panel-headding-content panel-header-action">
+          <form class="navbar-form navbar-left" action="/voices" method="get">
+            <span class="pull-left">
+              <div class="input-group">
+                <input type="text" name="search" id="search" placeholder="搜索" class="form-control">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit">查找</button>
+                </span>
+              </div>
+            </span>
+          </form>
+        </div>
+        <div class="action-form">
+          <div class="sub-action">
+            <ul class="list-inline">
+              <li><a class="btn btn btn-primary btn-sm" href="/voices/add">新增</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+    </div>
+    <div class="panel-body">
+      <ul class="list-unstyled schedule_list">
+        {% for voice in voices %}
+          <li class="clearfix pb5 pt5 br-b">
+            <div class="row">
+              <div class="col-sm-3">
+                <h4>{{ voice.file_name }}</h4>
+                <p class="text-success text-left">
+                  {{ voice.file_voice_desc}}
+                </p>
+              </div>
+              <div class="col-sm-4">
+              </div>
+              <div class="col-sm-5">
+                <p class="text-muted">
+                  创建时间：{{ voice.createdAt() }}
+                </p>
+                <ul class="list-inline">
+                  <li>
+                    <a href="/voices/{{ voice.id }}/edit">编辑</a>
+                  </li>
+                  <li>
+                    <a class="play_record" data-url="/voices/{{ voice.id }}/play_voice" href="javascript:;">播放</a>
+                  </li>
+                  <li><a data-confirm="确认删除?" rel="nofollow" data-method="delete" href="/voices/{{ voice.id }}/delete?_method=DELETE"  onclick="if (confirm('您确定要删除吗？')){ var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;f.submit(); };return false;">删除</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+      <nav class="pull-right">
+        {{ pagination(pager, 'true' ,'/voices') }} 
+      </nav>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    audiojs.events.ready(function() {
+      as = audiojs.create($("#player audio")[0], {
+        loadError: function() {
+        }
+      });
+
+      $(".play_record").click(function(){
+        $(".voice_url").attr("src", $(this).data("url"));
+        as.play();
+      });
+    });
+
+    $('.call-record-header').click(function(){
+      var self = this;
+      $(self).parent().parent().nextUntil('tr.call-record-container').slideToggle(0, function(){});
+      if($(self).hasClass("glyphicon-plus")){
+        $(self).removeClass("glyphicon-plus").addClass("glyphicon-minus");
+      }else if($(self).hasClass("glyphicon-minus")){
+        $(self).removeClass("glyphicon-minus").addClass("glyphicon-plus");
+      }
+    });
+  });
+</script>
+{% endblock %}

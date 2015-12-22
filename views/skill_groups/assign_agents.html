@@ -1,0 +1,59 @@
+{% extends '../layouts/content.html' %}
+{% block content %}
+<header class="pager-header">
+  <h2 class="title">
+    分配坐席
+  </h2>
+</header>
+<div class="panel  pt20 mt5 all-height">
+  <form action="/skill_groups/{{ skill_group.id }}/update_assign_agents?_method=PUT" accept-charset="UTF-8" method="post">
+    <div class="panel action-panel">
+      <div class="panel-headding">
+        <header class="pager-header">
+          <div class="panel-headding-content panel-header-action">
+            <div class="pull-right">
+              <input type="submit" name="commit" value="保存" class="btn btn-sm btn-primary">
+              <a class="btn btn btn-default btn-sm" href="/skill_groups">返回</a>
+            </div>
+          </div>
+        </header>
+      </div>
+      <div class="panel-body">
+        <ul class="list-unstyled schedule_list">
+          {% for user in users %}
+            {% if loop.index % 3 == 1 %}
+            <li class="pt10">
+              <div class="row">
+            {% endif %}
+              <div class="col-sm-4">
+                <div class="input-group">
+                  <span type="button" class="input-group-addon" style="width:110px">
+                    {{ user.name }}
+                    [{{ user.job_code }}]
+                  </span>
+                  <input type="text" class="form-control" name="agent_priority[]" value="{% if agents[user.id]|isNumber %}{{ agents[user.id] }}{% else %}0{% endif %}">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default">
+                      <input type="hidden" name="agent_name[]" value="{{ user.name }}">
+                      <input type="hidden" name="agent_job_code[]" value="{{ user.job_code }}">
+                      <input type="hidden" name="agent_user[]" value="{{ user.id }}">
+                      <input type="checkbox" name="agent_is_checked[]" {% if agents[user.id]|isNumber %} checked="checked" {% endif %} value="{{ user.job_code }}">
+                    </button>
+                  </div>
+                </div>
+              </div>
+            {% if loop.index % 3 == 0 && !loop.last %}
+              </div>
+            </li>
+            {% endif %}
+            {% if loop.index % 3 != 0 && loop.last %}
+              </div>
+            </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends '../layouts/content.html' %}
+{% block content %}
+  <header class="pager-header">
+    <h2 class="title">用户编辑</h2>
+  </header>
+  <div class="panel mb25 mt5 all-height">
+    <div class="p25 pb5 row all-height">
+      <div class="tab-content">
+          <div id="tab1_1" class="tab-pane active">
+            <form class="simple_form form-horizontal" novalidate="novalidate" id="new_user" action="/users/{{ user.id }}?_method=PUT" accept-charset="UTF-8" method="post">
+              <input name="utf8" type="hidden" value="✓">
+              <input type="hidden" name="department_id" id="department_id" value="{{ user.department_id }}">
+              <div class="input string required user_job_code">
+                <div class="form-group">
+                  <label class="string required control-label col-sm-2" tag="label" for="user_job_code">
+                    <abbr title="required">*</abbr> 工号
+                  </label>
+                  <div class="col-sm-6">
+                    <input class="string required form-control" value="{{ user.job_code }}" placeholder="工号" type="text" name="user[job_code]" id="user_job_code">
+                  </div>
+                  <label class="col-sm-3 text-danger">
+                    {{ user.showErr(errors, 'job_code') }}
+                  </label>
+                </div>
+              </div>
+              <div class="input string required user_name">
+                <div class="form-group">
+                  <label class="string required control-label col-sm-2" tag="label" for="user_name">
+                    <abbr title="required">*</abbr> 姓名
+                  </label>
+                  <div class="col-sm-6">
+                    <input class="string required form-control" placeholder="姓名" value="{{ user.name }}" type="text" name="user[name]" id="user_name">
+                  </div>
+                  <label class="col-sm-3 text-danger">
+                    {{ user.showErr(errors, 'name') }}
+                  </label>
+                </div>
+              </div>
+              <div class="input tel required user_phone">
+                <div class="form-group">
+                  <label class="tel required control-label col-sm-2" tag="label" for="user_phone">
+                    <abbr title="required">*</abbr> 手机
+                  </label>
+                  <div class="col-sm-6">
+                    <input class="string tel required form-control" placeholder="手机" value="{{ user.phone }}" type="text" name="user[phone]" id="user_phone">
+                  </div>
+                  <label class="col-sm-3 text-danger">
+                    {{ user.showErr(errors, 'phone') }}
+                  </label>
+                </div>
+              </div>
+              <div class="input email optional user_email">
+                <div class="form-group">
+                  <label class="email optional control-label col-sm-2" tag="label" for="user_email">邮箱</label>
+                  <div class="col-sm-6">
+                    <input class="string email optional form-control" placeholder="邮箱" value="{{ user.email }}" type="text" name="user[email]" id="user_email">
+                  </div>
+                  <label class="col-sm-3 text-danger"></label>
+                </div>
+              </div>
+              <div class="input string optional user_department_name">
+                <div class="form-group">
+                  <label class="string optional control-label col-sm-2" tag="label" for="user_department_name">部门</label>
+                  <div class="col-sm-6">
+                    <input data-value="{{ user.department_id }}" class="string optional form-control" placeholder="部门" type="text" value="{{ dept.name }}" name="user[department_name]" id="user_department_name">
+                  </div>
+                </div>
+              </div>
+              <div class="input boolean optional user_activated">
+                <div class="form-group">
+                  <label class="boolean optional control-label col-sm-2" tag="label" for="user_activated">开通账户</label>
+                    <div class="col-sm-6">
+                      <input class="boolean optional account-active-switch form-control" type="checkbox" value="{{ user.activated }}" name="user[activated]" {% if user.activated %} checked {% endif %} />
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-12">
+                  <a class="btn-link btn-default pr10" href="/users?department_id={{ user.department_id }}">取消</a>
+                  <input type="submit" name="commit" value="提交" class="btn btn btn-primary">
+                </div>
+              </div>
+            </form>
+          </div>
+      </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.user_roles input[type="checkbox"]').iCheck({ checkboxClass: 'icheckbox_square-red', increaseArea: '20%' });
+    $("input[name='user[department_name]']").treeSelect({url: '/departments'});    
+    $(".account-active-switch").bootstrapSwitch({ onText:'是', offText:'否', size:"small" });
+  });
+  
+  $('.account-active-switch').on('switchChange.bootstrapSwitch', function(event, state) {
+    $(this).attr('value', state);
+    if ($(this).is(":checked")) {
+      $(".active-password").show();
+    }else{
+      $(".active-password").hide();
+    }
+  });
+</script>
+{% endblock %}

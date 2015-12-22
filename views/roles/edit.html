@@ -1,0 +1,106 @@
+{% extends '../layouts/content.html' %}
+{% block head %}
+{% parent %}
+<link href="/public/stylesheets/zTreeStyle.css" rel="stylesheet" type="text/css"/>
+<script src="/public/javascripts/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
+<style>
+.ztree{
+    padding-left: 180px;
+    margin-top: 10px;
+}
+</style>
+{% endblock %}
+{% block content %}
+  <header class="pager-header">
+    <h2 class="title">角色修改</h2>
+  </header>
+  <div class="panel mb25 mt5 all-height">
+    <div class="p25 pb5 row all-height">
+      <div class="tab-content">
+          <div id="tab1_1" class="tab-pane active">
+            <form class="simple_form form-horizontal" name="editForm" id="editForm" method="post" action="/roles/{{ role.id }}?_method=PUT">
+              <div class="input string required">
+                <div class="form-group">
+                  <label class="string required control-label col-sm-2">
+                    <abbr title="required">*</abbr>角色名称
+                  </label>
+                  <div class="col-sm-6">
+                    <input class="string required form-control" placeholder="角色名称" type="text" name="name" value="{{ role.name }}">
+                  </div>
+                  <label class="col-sm-3 text-danger">
+                  </label>
+                </div>
+              </div>
+              <input type="hidden" name="sele_pids" value="{{ ids }}" id="sele_pids"/>   
+            </form>
+            <div class="input string required">
+              <ul id="treeDemo" class="ztree"></ul>
+            </div>
+            <input type="hidden" name="pcodes" value="{{ array }}" id="pcodes"/>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-12">
+                <a class="btn-link btn-default pr10" href="/roles">取消</a>
+                <a href="javascript:saveConfig();" class="btn btn btn-primary">提交</a>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>  
+<script type="text/javascript">
+  <!--
+  var setting = {
+    check: {
+      enable: true
+    },
+    data: {
+      simpleData: {
+        enable: true
+      }
+    }
+  };
+
+  $(document).ready(function(){
+    var _nodesStr= $('#pcodes').val();
+    var zNodes=JSON.parse(_nodesStr);
+    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+    updateTree();
+  });
+  //-->
+
+  function getTree(){
+    return $.fn.zTree.getZTreeObj("treeDemo");
+  }
+  
+  function updateTree(){
+    var ids = $('#sele_pids').val();
+    var arr = ids.split(",");
+    var zTree = getTree();
+    var node;
+    for(var i=0;i<arr.length;i++){
+      node = zTree.getNodeByParam("id",arr[i],null);
+      if(!node.isParent){
+        zTree.checkNode(node,true,true);
+      }
+    }
+  }
+  
+  function saveConfig(){
+    var seleObj=$("#sele_pids");
+    var zTree = getTree();
+    var checkedArr = zTree.getCheckedNodes(true);
+    var idArr=[];
+    for(var i=0;i<checkedArr.length;i++){
+      idArr.push(checkedArr[i].id);
+    }
+    var idStr = idArr.join(",");
+    if(!idStr){
+      alert("请选择权限");
+      return;
+    }else{
+      seleObj.val(idStr);
+      $('#editForm').submit();
+    }
+  }
+</script>         
+{% endblock %}   

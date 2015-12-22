@@ -1,0 +1,14 @@
+ <ul class="asideL">
+    {% for menu in menus %}
+     <li class="current"><a href="javascript:;"><img class="meeting_icon" src="{{ menu.ico }}"/><p class="menu_content">
+        {{ menu.name }}</p><em class="point_icon"></em> </a></li>
+     <li class="hide_li" style="display:block">
+        <ul>
+            {% for child in menu.resources %}
+            <li><a href="{{ child.url }}" class="list_hover"><img class="meeting_icon" src="{{ child.ico }}" /><p class="menu_content">
+                {{ child.name }}</p><em class=""></em></a></li>
+            {% endfor %}
+        </ul>  
+     </li>
+    {% endfor %}
+ </ul>

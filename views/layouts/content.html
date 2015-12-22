@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <head>
+    <title>{% block title %}E聆{% endblock %}</title>
+    {% block head %}
+      <link rel="stylesheet" type="text/css" href="/stylesheets/content.css" />
+      <link rel="stylesheet" type="text/css" href="/public/stylesheets/jqtree.css" />
+      <link rel="stylesheet" type="text/css" href="/public/stylesheets/jquery.timepicker.css" />
+      <link rel="stylesheet" type="text/css" href="/public/stylesheets/chosen.css" />
+      <link rel="stylesheet" type="text/css" href="/public/stylesheets/bootstrap-datetimepicker.css" />
+
+      <script type="text/javascript" src="/public/javascripts/jquery.min.js"></script>
+      <script type="text/javascript" src="/public/javascripts/bootstrap.min.js"></script>
+      <script type="text/javascript" src="/public/javascripts/basic.js"></script>
+      <script type="text/javascript" src="/public/javascripts/bootstrap-switch.js"></script>
+      <script type="text/javascript" src="/public/javascripts/jquery.timepicker.js"></script>
+      <script type="text/javascript" src="/public/javascripts/jquery.numeric.js"></script>
+      <script type="text/javascript" src="/public/javascripts/icheck.js"></script>
+      <script type="text/javascript" src="/public/javascripts/tree.jquery.js"></script>
+      <script type="text/javascript" src="/public/javascripts/jquery.tree_select.js"></script>
+      <script type="text/javascript" src="/public/javascripts/jquery.select_cascade.js"></script>
+      <script type="text/javascript" src="/public/javascripts/jquery.ui.widget.js"></script>
+      <script type="text/javascript" src="/public/javascripts/jquery.iframe-transport.js"></script>
+      <script type="text/javascript" src="/public/javascripts/jquery.fileupload.js"></script>
+      <script type="text/javascript" src="/public/javascripts/chosen.jquery.js"></script>
+      <script type="text/javascript" src="/public/javascripts/moment-with-locales.js"></script>
+      <script type="text/javascript" src="/public/javascripts/bootstrap-datetimepicker.js"></script>
+      <script type="text/javascript" src="/public/javascripts/monitoring.js"></script>
+      <script type="text/javascript" src="/public/javascripts/softphone.js"></script>
+      <script type="text/javascript" src="/public/javascripts/bootstrap-number-input.js"></script>
+    </style>
+    {% endblock %}
+  </head>
+<body>
+  <div class="submitting alert alert-warning" role="alert" style="position: fixed; top: 0px; left: 50%; margin-left: -51px;  display:none; z-index: 1500">
+    数据请求中...
+  </div>
+  <div class="message" style="position: fixed; top: 14px; right: 50px;">
+    {% include '_flash_messages.html' %}
+  </div>
+  <aside class="panel-left">
+    {% include '_submenu.html' %}
+  </aside>
+  <div class="panel-section p15">
+    {% block content %}{% endblock %}
+  </div>
+  <script>
+    $(document).ajaxSend(function() {
+      $(".submitting").show();
+    }).ajaxSuccess(function() {
+      $(".submitting").hide();
+    })     
+  </script>  
+</body>

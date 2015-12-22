@@ -1,0 +1,82 @@
+{% extends '../../layouts/content.html' %}
+{% block content %}
+<header class="pager-header">
+  <h2 class="title">
+    日程管理
+  </h2>
+</header>
+<div class="panel  pt20 mt5 all-height ">
+  <div class="panel action-panel">
+    <div class="panel-headding">
+      <header class="pager-header">
+        <div class="panel-headding-content panel-header-action">
+          <form class="navbar-form navbar-left" action="/schedules" accept-charset="UTF-8" method="get">
+            <span class="pull-left">
+              <div class="input-group">
+                <input type="hidden" name="type" id="type" value="schedule">
+                <input type="text" name="search" id="search" placeholder="搜索" class="form-control">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit">查找</button>
+                </span>
+              </div>
+            </span>
+          </form>
+        </div>
+        <div class="action-form">
+          <div class="sub-action">
+            <ul class="list-inline">
+              <li><a class="btn btn btn-primary btn-sm" href="/schedules/add">新增</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+    </div>
+    <div class="panel-body">
+      <ul class="list-unstyled schedule_list">
+        {% for k,v in rs %}
+        <li class="clearfix pb5 pt5 br-b">
+          <div class="row">
+            <div class="col-sm-3">
+              <h4>无前置语音坐席组</h4>
+              <h5 class="success">
+                <span class="label label-primary">
+                  <i class="glyphicon glyphicon-phone-alt pr10"></i>01056954988
+                </span>
+              </h5>
+            </div>
+            <div class="col-sm-4">
+              <p class="text-danger text-right">
+                2015-09-27  - 2015-12-31 
+              </p>
+              <p class="text-danger text-right">
+                日,一,二,三,四,五,六 
+                &nbsp;&nbsp; | &nbsp;&nbsp; 
+                00:00 - 23:42
+              </p>
+            </div>
+            <div class="col-sm-5">
+              <p>
+                <span class="label label-info">优先级：0</span> &nbsp;&nbsp; 
+                <span class="label label-success">
+                  <i class="glyphicon glyphicon-ok-circle pr5"></i>使用中
+                </span>
+              </p>
+              <ul class="list-inline">
+                <li><a href="/schedules/{{ v.id }}/copy">复制新建</a></li>&nbsp;|&nbsp;
+                <li><a href="/schedules/{{ v.id }}/status">停止</a></li>&nbsp;|&nbsp;
+                <li><a href="/schedules/{{ v.id }}/nodes">设置IVR</a></li>&nbsp;|&nbsp;
+                <li><a href="/schedules/{{ v.id }}/edit">编辑</a></li>&nbsp;|&nbsp;
+                <li><a data-confirm="确认删除?" rel="nofollow" href="/schedules/{{ v.id }}">删除</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      <nav class="pull-right">
+        
+      </nav>
+    </div>
+  </div>
+</div>
+{% endblock %}

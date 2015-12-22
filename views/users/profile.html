@@ -1,0 +1,60 @@
+ {% extends '../layout.html' %}
+ {% block content %}
+ 
+       <div class="meeting_bj">
+                <div class="meeting_detail">
+                <div class="clear meeting_title">
+                    <h3>个人信息</h3>
+                     <span class="fun_btnlist clear">
+                      <a href="/user/{{ user._id |safe}}/edit"  class="search_btn">修改</a>
+                    </span>
+                    </div>
+                    <div class="meeting_tab_bj manage_bj">
+                        <div class="manageTab_bj">
+                            <table class="editor_tab">
+                                <tbody>
+                                   <tr>
+                                        <td class="td_text_r td_20">姓名：</td>
+                                        <td>{{ user.real_name }}</td>
+                                    </tr>
+                                       <tr>
+                                        <td class="td_text_r">用户名：</td>
+                                        <td>{{ user.user_name }}</td>
+                                    </tr>
+                                             <tr>
+                                        <td class="td_text_r">工号：</td>
+                                        <td>{{ user.job_code }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="td_text_r">手机号码：</td>
+                                        <td>{{ user.mobile }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td_text_r">固定电话：</td>
+                                        <td>{{ user.phone }}</td>
+                                    </tr>
+                                         <tr>
+                                        <td class="td_text_r">个人密码：</td>
+                                        <td>{{ user.private_key }}</td>
+                                    </tr>
+                             
+                                    <tr>
+                                       <td class="td_text_r">号码已验证：</td>
+                                    <td>{% if user.if_verify == 0 %} 否 {% elseif user.if_verify == 1 %}是 {% endif %}</td>
+                                    </tr> 
+                                           <tr>
+                                       <td class="td_text_r">允许创建会议：</td>
+                                        <td>{% if user.create_meeting == 0 %} 否 {% elseif user.create_meeting == 1 %}是 {% endif %}</td>
+                                    </tr>
+                                    <tr>
+                                       <td class="td_text_r">允许巡检会议：</td>
+                                         <td>{% if user.polling == 0 %} 否 {% elseif user.polling == 1 %}是 {% endif %}</td>
+                                    </tr>
+                                </tbody>
+                            </table> 
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+ {% endblock %}

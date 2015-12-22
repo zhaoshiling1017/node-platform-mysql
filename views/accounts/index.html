@@ -1,0 +1,128 @@
+{% extends '../layouts/content.html' %}
+{% block content %}
+<header class="pager-header">
+  <h2 class="title">账户设置</h2>
+  <p class="subtitle">设置您的个人系统账户的所有信息，包括基本信息，通话设置以及语音导航</p>
+</header>
+<div class="panel" style="height:100% !important;">
+  <div class="panel-heading">
+    <ul class="nav nav-tabs myTab">
+      <li role="presentation" class="active"><a href="#tab1_1">基本信息</a></li>
+      <li role="presentation"><a href="#tab1_2" class="">通话设置</a></li>
+    </ul>
+  </div>
+  <div class="panel-body" style="height:100% !important;">
+    <div class="tab-content" style="height:100% !important;">
+      <div id="tab1_1" class="tab-pane active">
+        <div class="form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-2">公司名称</label>
+            <div class="col-sm-6">
+              <input disabled="disabled" class="form-control" placeholder="公司名称" type="text" value="{{ company }}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2">子域名</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+                <input class="form-control" placeholder="子域名" disabled="disabled" type="text" value="{{ subdomain }}">
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default">.yuanxee.com</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <form action="account_update?_method=PUT" accept-charset="UTF-8" method="post">
+            <div class="form-group">
+              <label class="control-label col-sm-2">联系人</label>
+              <div class="col-sm-6">
+                <input class="form-control" placeholder="联系人" type="text" value="{{ contactor }}" name="account[contactor]">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">联系方式</label>
+              <div class="col-sm-6">
+                <input class="form-control" placeholder="联系方式" type="text" value="{{ phone }}" name="account[phone]">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">地址</label>
+              <div class="col-sm-6">
+                <input class="form-control" placeholder="地址" type="text" value="{{ address }}" name="account[address]">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2"></label>
+              <div class="col-sm-6">
+                <label class="text-danger account-text-danger"></label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-10">
+               <input type="submit" name="commit" value="提交" class="btn btn-primary">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="tab1_2" class="tab-pane">
+        <div class="panel">
+          <div class="panel-body">
+            <form action="account_update?_method=PUT" accept-charset="UTF-8" method="post">
+              <div class="form-group clearfix">
+                <label class="control-label col-sm-2">事件服务器地址</label>
+                <div class="col-sm-6">
+                  <input class="form-control" placeholder="事件服务器" type="text" value="{{ event_server }}" name="account[event_server]">
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="control-label col-sm-2">CTI服务器地址</label>
+                <div class="col-sm-6">
+                  <input class="form-control" placeholder="CTI服务器" type="text" value="{{ cti_server }}" name="account[cti_server]">
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="control-label col-sm-2">ws_server</label>
+                <div class="col-sm-6">
+                  <input class="form-control" placeholder="ws_server" type="text" value="{{ ws_server }}" name="account[ws_server]">
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="control-label col-sm-2">默认拓传号码</label>
+                <div class="col-sm-6">
+                  <select name="account[default_number]" class="select optional form-control">
+                    <option value="">-- 请选择 --</option>
+                    <option value="56587302">56587302</option>
+                    <option selected="selected" value="89508181">89508181</option>
+                    <option value="60285450">60285450</option>
+                    <option value="01056954966">01056954966</option>
+                    <option value="01056587302">01056587302</option>
+                    <option value="01056954988">01056954988</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="control-label col-sm-2">sip代理</label>
+                <div class="col-sm-6">
+                  <input class="form-control" placeholder="sip代理" type="text" value="{{ sip_proxy }}" name="account[sip_proxy]">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-10">
+                 <input type="submit" name="commit" value="提交" class="btn btn-primary">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $('.myTab a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  })
+</script>
+{% endblock %}

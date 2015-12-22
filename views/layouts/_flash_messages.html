@@ -1,0 +1,11 @@
+{% for message in messages %}
+  <div class="flash alert {{ dict.messages_type[loop.key] }} fade in">
+  <button class="close pl10" data-dismiss="alert">×</button>
+    {{ message }}
+  </div>
+{% endfor %}
+<script>
+   $(".flash").fadeOut(5000, function(){
+      $(this).remove();
+   });
+</script>

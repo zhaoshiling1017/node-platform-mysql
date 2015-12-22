@@ -1,0 +1,62 @@
+{% extends '../layouts/main.html' %}
+{% block content %}
+<aside class="panel-left">
+  <div class="p10" style="overflow:auto;height:600px">
+      <header class="pager-header">
+        <h5 class="title ph10 mv15">配置主页</h5>
+      </header>
+      <ul class="nav nav-messages p5" role="menu">    
+      <li>
+        <a href="/config" class="text-dark fw600 p8 animated animated-short fadeInUp">
+          概述
+        </a>
+      </li>
+        </ul>    
+      <header class="pager-header">
+        <h5 class="title ph10 mv15">语音导航</h5>
+      </header>
+      <ul class="nav nav-messages p5" role="menu">    
+      <li>
+        <a href="/schedules?type=schedule" class="text-dark fw600 p8 animated animated-short fadeInUp">
+          日程
+        </a>
+      </li>
+      <li>
+        <a href="/schedules?type=dialout" class="text-dark fw600 p8 animated animated-short fadeInUp">
+          外呼流程
+        </a>
+      </li>
+      <li>
+        <a href="/voices" class="text-dark fw600 p8 animated animated-short fadeInUp">
+          语音库
+        </a>
+      </li>
+      <li>
+        <a href="/variables" class="text-dark fw600 p8 animated animated-short fadeInUp">
+          变量
+        </a>
+      </li>
+        </ul>    
+      <header class="pager-header">
+        <h5 class="title ph10 mv15">技能组</h5>
+      </header>
+      <ul class="nav nav-messages p5" role="menu">    
+      <li>
+        <a href="/skill_groups" class="text-dark fw600 p8 animated animated-short fadeInUp">
+          技能组
+        </a>
+      </li>
+        </ul>    
+      <header class="pager-header">
+        <h5 class="title ph10 mv15">外呼项目</h5>
+      </header>
+      <ul class="nav nav-messages p5" role="menu">    
+      <li>
+        <a href="/dialout_tasks" class="text-dark fw600 p8 animated animated-short fadeInUp">
+          外呼项目
+        </a>
+      </li>
+		</ul>
+	</div>
+</aside>
+{% endblock %}

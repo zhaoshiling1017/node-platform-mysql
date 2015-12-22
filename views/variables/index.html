@@ -1,0 +1,69 @@
+{% extends '../layouts/content.html' %}
+{% block content %}
+<header class="pager-header">
+  <h2 class="title">
+    变量管理
+  </h2>
+</header>
+<div class="panel  pt20 mt5 all-height ">
+  <div class="panel action-panel">
+    <div class="panel-headding">
+      <header class="pager-header">
+        <div class="panel-headding-content panel-header-action">
+          <form class="navbar-form navbar-left" action="/variables" method="get">
+            <span class="pull-left">
+              <div class="input-group">
+                <input type="text" name="search" id="search" placeholder="搜索" class="form-control">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit">查找</button>
+                </span>
+              </div>
+            </span>
+          </form>
+        </div>
+        <div class="action-form">
+          <div class="sub-action">
+            <ul class="list-inline">
+              <li><a class="btn btn btn-primary btn-sm" href="/variables/add">新增</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+    </div>
+    <div class="panel-body">
+      <ul class="list-unstyled schedule_list">
+        {% for variable in variables %}
+          <li class="clearfix pb5 pt5 br-b">
+            <div class="row">
+              <div class="col-sm-3">
+                <h4>{{ variable.name }}</h4>
+                <p class="text-success text-left">
+                  {{ variable.desc }}
+                </p>
+              </div>
+              <div class="col-sm-4">
+              </div>
+              <div class="col-sm-5">
+                <p class="text-muted">
+                  创建时间：{{ variable.createdAt() }}
+                </p>
+                <ul class="list-inline">
+                  <li>
+                    <a href="/variables/{{ variable.id }}/edit">编辑</a>
+                  </li>
+                  <li>
+                  </li>
+                  <li><a data-confirm="确认删除?" rel="nofollow" data-method="delete" href="/variables/{{ variable.id }}/delete?_method=DELETE"  onclick="if (confirm('您确定要删除吗？')){ var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;f.submit(); };return false;">删除</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+      <nav class="pull-right">
+        {{ pagination(pager, 'true' ,'/variables') }} 
+      </nav>
+    </div>
+  </div>
+</div>
+{% endblock %}

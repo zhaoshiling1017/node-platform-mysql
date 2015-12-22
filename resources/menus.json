@@ -1,0 +1,54 @@
+[
+{
+  "title": "话单",
+  "name": "menu.call_record",
+  "code": "002",
+  "class": "glyphicon glyphicon-list-alt",
+  "type": "app",
+  "url": "/call_records",
+  "resources": [
+	  {
+	    "title": "话单记录",
+	    "name": "menu.call_record.record",
+	    "code": "002001",
+	    "resources": [
+	      {
+	        "title": "话单信息",
+	        "name": "menu.call_record.record.call_order_info",
+	        "code": "002001001",
+	        "url": "/call_records"
+	      }
+	    ]
+	  }
+  ]
+},
+{
+  "title": "系统管理",
+  "name": "menu.system",
+  "code": "009",
+  "class": "glyphicon glyphicon-cog",
+  "type": "sys",
+  "url": "/system",
+  "resources": [
+    {
+      "title": "管理",
+      "name": "menu.system.manage",
+      "code": "009002",
+      "resources": [
+        {
+          "title": "人员",
+          "name": "menu.system.manage.user",
+          "code": "009002001",
+          "url": "/users"
+        },
+        {
+          "title": "角色",
+          "name": "menu.system.manage.role",
+          "code": "009002002",
+          "url": "/roles"
+        }
+      ]
+    }
+  ]
+}
+]

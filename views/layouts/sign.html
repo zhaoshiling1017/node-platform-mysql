@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>{% block title %}E聆{% endblock %}</title>
+	  {% block head %}
+	    <!-- style -->
+	  	<link rel="stylesheet" type="text/css" href="/stylesheets/logins.css" />
+	    <!-- scripts -->
+	    <script type="text/javascript" src="/public/javascripts/jquery.min.js"></script>
+	  {% endblock %}
+	</head>
+	<body>
+		<div class="layout_wrap">
+	      {% block content %}{% endblock %}
+          <p class="notice"></p>
+          {% if error %}
+            <p class="alert text-danger">{{ error }}</p>
+          {% endif %}
+	    </div>
+	</body>
+</html>

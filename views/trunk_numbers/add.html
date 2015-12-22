@@ -1,0 +1,36 @@
+{% extends '../layouts/content.html' %}
+{% block content %}
+  <header class="pager-header">
+    <h2 class="title">
+    新建中继号
+    </h2>
+  </header>
+  <div class="panel mb25 mt5 all-height">
+    <div class="p25 pb5 row all-height">
+      <div class="tab-content">
+        <div id="tab1_1" class="tab-pane active">
+          <form class="simple_form form-horizontal" action="/trunk_numbers" accept-charset="UTF-8" method="post">
+            <div class="input string optional">
+              <div class="form-group">
+                <label class="string optional control-label col-sm-2" tag="label">号码</label>
+                <div class="col-sm-6">
+                  <input class="string optional form-control" placeholder="号码" type="text" name="trunk_number[number]">
+                </div>
+                <label class="col-sm-3 text-danger">
+                    {{ trunk_number.showErr(errors, 'number') }}
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-12">
+                <a class="btn-link btn-default pr10" href="/trunk_numbers">取消</a>
+                <input type="submit" name="commit" value="保存" class="btn btn-sm btn-primary">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

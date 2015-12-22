@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div id="message">
+正在加载......
+</div>
+<script type="text/javascript">
+ window.onload=function _init(){
+    /*var _turn=$('.asideL .hide_li ul li a').first().attr('href');
+    if(_turn){
+        window.location.href=_turn;
+    }else{
+        $('#message').html("您没有任何权限");      
+    }*/
+    $('#message').html("");
+}
+</script>
+{% endblock %}

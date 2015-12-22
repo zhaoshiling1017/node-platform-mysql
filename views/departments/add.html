@@ -1,0 +1,31 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h4 class="modal-title">
+        部门新增
+      </h4>
+    </div>
+    <form class="simple_form form-horizontal" novalidate="novalidate" id="new_department" action="/departments" accept-charset="UTF-8" data-remote="true" method="post">
+      <input name="utf8" type="hidden" value="✓">
+      <div class="modal-body">
+        <div class="input string required department_name">
+          <div class="form-group">
+            <label class="string required control-label col-sm-2" tag="label" for="department_name">
+              <abbr title="required">*</abbr>部门名称
+            </label>
+            <div class="col-sm-6">
+              <input class="string required form-control" placeholder="部门名称" type="text" value="" name="department[name]" id="department_name">
+            </div>
+            <label class="col-sm-3 text-danger"></label>
+          </div>
+        </div>
+        <input type="hidden" name="parent_id" id="parent_id" value="{{ department_id }}">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-link btn-default" data-dismiss="modal">关闭</button>
+        <button type="submit" class="btn btn-primary save_department">保存</button>
+      </div>
+    </form>
+  </div>
+</div>
